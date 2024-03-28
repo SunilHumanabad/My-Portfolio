@@ -153,16 +153,6 @@ export const ProjectData = [
 export const ExperienceData = [
     {
         id : 1,
-        comp : "Sharnbasva University",
-        img: "https://upload.wikimedia.org/wikipedia/en/a/a3/Sharnbasva_University_logo.png",
-        form_to : "Feb 2021 - Sep 2023",
-        points : [
-            "Holding a Master's degree in Computer Applications, at Sharnbasva University, Kalaburagi.",
-        ],
-        animation : 0.7
-    },
-    {
-        id : 2,
         comp : "Utilinet Technologies Services",
         img: "https://utilinettech.com/images/Utilinet.png",
         form_to : "Mar 2023 - Sep 2023",
@@ -171,6 +161,16 @@ export const ExperienceData = [
         ],
         animation : 1.0
     },
+    {
+        id : 2,
+        comp : "Unplex Technologies",
+        img: "https://unplex.tech/wp-content/uploads/2023/10/unplex.png",
+        form_to : "Mar 2024 - Present",
+        points : [
+            "Currently, I'm proudly contributing to Unplex Technologies as a Fullstack Developer. In this role, I'm deeply involved in the development lifecycle, seamlessly integrating frontend and backend technologies to create robust digital solutions. Collaborating within a dynamic team, I leverage my expertise to drive innovation and deliver top-tier products. My dedication to excellence ensures that I consistently meet and exceed project goals, contributing to Unplex's ongoing success in revolutionizing the digital landscape."
+        ],
+        animation : 1.0
+    }
 ]
 
 // Contact Me Details
