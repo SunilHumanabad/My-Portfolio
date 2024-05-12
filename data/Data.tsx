@@ -153,7 +153,7 @@ export const ProjectData = [
         desc : "The project for Unplex Company focuses on creating a comprehensive digital platform to support their diverse business areas, including medical devices, defense sector, and industrial automation. The website serves as a central hub to showcase their products and services tailored to these sectors. Additionally, Google Analytics integration provides valuable insights into viewer demographics and behavior, empowering Unplex to optimize their online presence and better understand their audience.",
         tech : ['php', 'mySQL', 'Bootstrap', 'Gsap', 'jQuery', 'CSS', 'HTML'],
         link : "https://unplex.tech/",
-        img : "https://unplex.tech/static/img/logos/icon.png",
+        img : "https://unplex.tech/static/img/logos/Logo.png",
         animation : 1.5
     },
 ]
