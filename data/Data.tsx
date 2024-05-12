@@ -146,6 +146,15 @@ export const ProjectData = [
         link : "https://github.com/SunilHumanabad/Phishing-Detection-Using-ML",
         img : "PhishingWebsite.png",
         animation : 1.3
+    },{
+        id : 5,
+        title : "Unplex",
+        date : "April 07 2023",
+        desc : "The project for Unplex Company focuses on creating a comprehensive digital platform to support their diverse business areas, including medical devices, defense sector, and industrial automation. The website serves as a central hub to showcase their products and services tailored to these sectors. Additionally, Google Analytics integration provides valuable insights into viewer demographics and behavior, empowering Unplex to optimize their online presence and better understand their audience.",
+        tech : ['php', 'mySQL', 'Bootstrap', 'Gsap', 'jQuery', 'CSS', 'HTML'],
+        link : "https://unplex.tech/",
+        img : "https://unplex.tech/static/img/logos/icon.png",
+        animation : 1.5
     },
 ]
 
@@ -165,7 +174,7 @@ export const ExperienceData = [
         id : 2,
         comp : "Unplex Technologies",
         img: "https://unplex.tech/wp-content/uploads/2023/10/unplex.png",
-        form_to : "Mar 2024 - Present",
+        form_to : "Feb 2024 - Present",
         points : [
             "Currently, I'm proudly contributing to Unplex Technologies as a Fullstack Developer. In this role, I'm deeply involved in the development lifecycle, seamlessly integrating frontend and backend technologies to create robust digital solutions. Collaborating within a dynamic team, I leverage my expertise to drive innovation and deliver top-tier products. My dedication to excellence ensures that I consistently meet and exceed project goals, contributing to Unplex's ongoing success in revolutionizing the digital landscape."
         ],
