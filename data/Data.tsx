@@ -173,7 +173,7 @@ export const ExperienceData = [
     {
         id : 2,
         comp : "Unplex Technologies",
-        img: "https://unplex.tech/wp-content/uploads/2023/10/unplex.png",
+        img: "https://unplex.tech/static/img/logos/icon.png",
         form_to : "Feb 2024 - Present",
         points : [
             "Currently, I'm proudly contributing to Unplex Technologies as a Fullstack Developer. In this role, I'm deeply involved in the development lifecycle, seamlessly integrating frontend and backend technologies to create robust digital solutions. Collaborating within a dynamic team, I leverage my expertise to drive innovation and deliver top-tier products. My dedication to excellence ensures that I consistently meet and exceed project goals, contributing to Unplex's ongoing success in revolutionizing the digital landscape."
