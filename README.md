@@ -1,67 +1,74 @@
+# Sunil Humanabad: Portfolio
 
-# My Portfolio 
+My personal portfolio site. It's built with **Next.js 16**, **React 19** and **Framer Motion 12**, styled with plain CSS, and exported as a fully static site.
 
-This portfolio showcases the work and experience of the Developer. It provides a glimpse into the projects completed, skills possessed, and professional journey. This readme will guide you through the structure and content of the portfolio.
+Live: https://sunilhumanabad.vercel.app
 
-
-## Installation
-
-Install my-project with npm
+## Quick start
 
 ```bash
-git clone https://github.com/SunilHumanabad/My-Portfolio.git
-```
-OR Download with
-
-```bash
-https://github.com/SunilHumanabad/My-Portfolio.git
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Install all dependency using.
+| Command         | What it does                                                    |
+| --------------- | --------------------------------------------------------------- |
+| `npm run dev`   | Development server with hot reload                              |
+| `npm run build` | Static production build in `out/`                               |
+| `npm start`     | Serves `out/` locally (run `npm run build` first)               |
+| `npm run lint`  | ESLint (Next.js core-web-vitals rules)                          |
+| `npm run check` | Lint + build. Run this before deploying                         |
 
-```bash
-  npm i
-```
+Requires Node.js 20.9 or newer.
 
-Next, run the development server:.
+## Where to edit things
 
-```bash
-  npm run dev
-```
+All personal content is in two places. UI components never hard-code names or contact details.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-## Overview
+| File                    | Contents                                                                    |
+| ----------------------- | --------------------------------------------------------------------------- |
+| `config/site.js`        | Name, profession, bio, location, contact, socials, résumé link, SEO, colours, section toggles, UI labels |
+| `data/projects.js`      | Projects (featured + archive). The schema is documented at the top of the file |
+| `data/experience.js`    | Work experience and (optional) education                                    |
+| `data/skills.js`        | Core stack with self-assessed levels, plus other tools                     |
+| `public/assets/`        | Portrait, project images and the Open Graph image                          |
+| `app/icon.svg`, `app/apple-icon.png` | Favicon and touch icon                                        |
 
-This portfolio showcases the work and experience of the Developer. It provides a glimpse into the projects completed, skills possessed, and professional journey. This readme will guide you through the structure and content of the portfolio.
+If a value is empty, the matching UI is hidden. For example, leaving `contact.whatsapp` empty hides the WhatsApp link, and a project with no `liveUrl` shows no "Live site" button.
 
-## Pages
+### Adding a project
 
-#### 1. Home Page
-The Home page offers a brief introduction to the developer, high lighting key attributes and interests.
+1. Export a screenshot as WebP, about 1600 px wide, into `public/assets/projects/`.
+2. Add an entry to `data/projects.js` with `cover: { src, width, height, alt }`.
+3. Set `featured: true` to show it large in **Selected Work**. Every project appears in the **Project Archive**.
 
-#### 2. About Page
-The About page provides a more detailed introduction about the developer, including a summary of their background, total number of projects completed, and a list of technologies they are proficient in.
+A project with no image gets a designed typographic cover automatically.
 
-#### 3. Project Page
-The Project page presents an overview of all the projects completed by the developer. Each project is accompanied by details such as its publication date, the technologies utilized, and a link to its GitHub repository for further exploration.
+### Changing the name
 
-#### 4. Experience Page
-The Experience page offers a concise overview of the developer's professional experience, high lighting key roles, responsibilities, and achievements.
+The hero sets both name lines to the same width using the widths in `identity.nameLineWidthsEm`. If the name changes, update those numbers (or delete them to fall back to an estimate).
 
-#### 5. Contact Page
-The Contact page provides contact details for the developer, enabling visitors to reach out for collaboration, inquiries, or networking opportunities.
+## Features
 
-## How to Use
+- Cinematic hero: oversized Anton name, a cut-out portrait layered between solid and outlined type, and restrained scroll parallax
+- **Motion** button in the header plays a swarm intro: cursors labelled with my skills fly in and stamp out my name. It's original canvas code with no third-party scripts
+- Animations on/off switch. The choice is saved under `sunil-humanabad:motion` and follows the OS "reduce motion" setting by default
+- Selected Work rows plus a Project Archive with category filters, search, load-more and a cursor-following preview
+- Project dialog with focus trap, Escape/backdrop/close, ←/→ to move between projects, and focus restored on close
+- Expandable experience timeline, skills with self-assessed levels
+- Contact form that validates and opens the visitor's email app (`mailto:`). It never claims a message was "sent"
+- SEO: title/description, canonical URL, Open Graph/Twitter image, JSON-LD `Person`, `robots.txt`, `sitemap.xml`
+- Accessibility: skip link, landmarks, a single `h1`, visible focus styles, 44 px tap targets, `inert` background behind dialogs and the mobile menu
 
-To customize this portfolio:
+## Deploying
 
-- Update the `data.tsx` file in the `Data` directory with your personal information, project details, and experience.
-- Modify the content of the webpages according to your preferences by editing the corresponding React components.
-- Deploy the portfolio on your preferred hosting platform to make it accessible online.
+`next.config.mjs` uses `output: 'export'`, so `npm run build` writes plain static files to `out/`.
 
-## Tech Stack
+- **Vercel**: import the repo. The defaults work.
+- **Netlify / Cloudflare Pages / GitHub Pages**: build command `npm run build`, publish directory `out`.
 
-**Client:** NextJS, NextUI, TailwindCSS, Framer motion, Three JS
+If the domain changes, update `websiteUrl` in `config/site.js` so the canonical URL, Open Graph tags and sitemap stay correct.
 
-**Server:** NodeJS
+## Content sources
 
+Content comes from the original portfolio repo (`data/Data.tsx`), the project READMEs on GitHub, and the public GitHub profile (location). The Task Management screenshots are frames from the demo video in that repository.

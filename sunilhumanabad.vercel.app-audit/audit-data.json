@@ -1,0 +1,289 @@
+{
+  "summary": {
+    "health_score": 70,
+    "business_type": "Personal portfolio — freelance UI/UX designer & full stack developer (service provider, Bengaluru; no physical storefront)",
+    "audited_url": "http://localhost:4173/ (local production build of https://sunilhumanabad.vercel.app)",
+    "date": "2026-11-07",
+    "top_findings": [
+      "Auto-playing live build runs for search-engine crawlers",
+      "Case-study detail is not indexable",
+      "Live build delays mobile LCP from 2.0 s to 7.9 s"
+    ],
+    "quick_wins": [
+      "Add a space between the hero name lines (H1) and experience heading spans",
+      "Trim the meta description to ~150 characters",
+      "Skip the auto-build for bots and on slow/Save-Data connections",
+      "Add ProfilePage + WebSite + ScholarlyArticle JSON-LD",
+      "Add public/llms.txt and align canonical/sitemap trailing slash"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 78,
+      "what_works": [
+        "Static export: every section is in the server HTML (943 words readable without JavaScript)",
+        "robots.txt allows all crawlers and points to the sitemap",
+        "sitemap.xml present; canonical, meta robots index/follow, lang=en",
+        "Unknown URLs return a real 404 (no soft-404 catch-all)",
+        "Single H1, semantic landmarks, no redirect chains"
+      ],
+      "findings": [
+        {
+          "title": "Auto-playing live build runs for search-engine crawlers",
+          "severity": "High",
+          "description": "With a Googlebot smartphone user agent the multiplayer-cursor build starts on load; 9 s later 98 content blocks were still at opacity 0. Text stays in the DOM, but the rendered snapshot Google evaluates shows a mostly blank page and the LCP element appears late.",
+          "recommendation": "Skip the auto-build for bots and automation (user-agent regex for Googlebot/Bingbot/etc. plus navigator.webdriver) in the pre-paint boot script; never hide the hero."
+        },
+        {
+          "title": "No security headers configured for deployment",
+          "severity": "Medium",
+          "description": "The static build ships no headers config. Vercel adds HSTS, but X-Content-Type-Options, Referrer-Policy, Permissions-Policy and a Content-Security-Policy are absent.",
+          "recommendation": "Add a vercel.json headers block (nosniff, strict-origin-when-cross-origin, a restrictive Permissions-Policy, and a CSP allowing self, Google Fonts' self-hosted files and youtube-nocookie frames)."
+        },
+        {
+          "title": "Canonical and sitemap disagree on the trailing slash",
+          "severity": "Low",
+          "description": "Canonical is https://sunilhumanabad.vercel.app (no slash); the sitemap and og:url use https://sunilhumanabad.vercel.app/.",
+          "recommendation": "Use one form everywhere (the trailing-slash root)."
+        },
+        {
+          "title": "Live URL still serves the previous site",
+          "severity": "Info",
+          "description": "https://sunilhumanabad.vercel.app is the old NextUI build; this audit ran on the new local production build.",
+          "recommendation": "Deploy, then verify the domain in Google Search Console and submit sitemap.xml."
+        }
+      ],
+      "weight_percent": 22
+    },
+    {
+      "name": "Content Quality",
+      "score": 70,
+      "what_works": [
+        "Strong E-E-A-T: real name and photo, live client sites, dated experience, IEEE paper with DOI",
+        "Specific, verifiable copy (no filler stats or invented testimonials)",
+        "Clear positioning: UI/UX design + full-stack + AI"
+      ],
+      "findings": [
+        {
+          "title": "Case-study detail is not indexable",
+          "severity": "High",
+          "description": "Full descriptions, highlights and screenshots for each project exist only inside a client-side dialog that renders on click. Crawlers see a title, a one-line summary and three bullets per featured project, and only a title row for the academic projects.",
+          "recommendation": "Generate a static page per project (/work/[slug] via generateStaticParams) with the full case study, link it from each card and the dialog, add it to the sitemap, and mark it up as CreativeWork."
+        },
+        {
+          "title": "Thin page text for a single-page site",
+          "severity": "Medium",
+          "description": "879 words in the HTML across the whole site. One page has to rank for the name, the role, the location and every project.",
+          "recommendation": "Project pages (above) fix most of this; a short paragraph per capability group and a one-line description per academic project in the archive add depth to the home page."
+        }
+      ],
+      "weight_percent": 23
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 75,
+      "what_works": [
+        "Title is 55 characters, leads with the name and role",
+        "Open Graph + Twitter large-image card with a 1200×630 image",
+        "Logical heading outline: H1 name, H2 sections, H3 projects"
+      ],
+      "findings": [
+        {
+          "title": "H1 text runs the name together: \"SunilHumanabad\"",
+          "severity": "Medium",
+          "description": "The hero name lines are adjacent block spans with no whitespace between them, so the heading's text content (what crawlers and some assistive tech read) is \"SunilHumanabad\". Experience headings have the same issue (\"Unplex TechnologiesFull Stack Developer\").",
+          "recommendation": "Insert a space between the line spans (and between organisation and role in the experience toggles)."
+        },
+        {
+          "title": "Meta description is 197 characters",
+          "severity": "Medium",
+          "description": "Google truncates around 155–160 characters, cutting off the stack list.",
+          "recommendation": "Trim to ~150, e.g. \"UI/UX designer and full stack developer in Bengaluru. Websites, web apps, AI agents and RAG apps built with React, Next.js, Python and Django.\""
+        },
+        {
+          "title": "No internal pages to link to",
+          "severity": "Low",
+          "description": "All internal links are in-page anchors.",
+          "recommendation": "Comes free with per-project pages."
+        }
+      ],
+      "weight_percent": 20
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 65,
+      "what_works": [
+        "Valid Person JSON-LD with jobTitle, image, address, worksFor, knowsAbout and sameAs (GitHub, LinkedIn)"
+      ],
+      "findings": [
+        {
+          "title": "Missing ProfilePage and WebSite types",
+          "severity": "Medium",
+          "description": "Google supports ProfilePage structured data for creator/profile pages; the page only declares a bare Person.",
+          "recommendation": "Wrap the Person as mainEntity of a ProfilePage and add a WebSite node."
+        },
+        {
+          "title": "IEEE paper and projects not described in schema",
+          "severity": "Medium",
+          "description": "The publication (DOI 10.1109/ICIICS59993.2023.10420933) and the client projects are strong authority signals but appear only as text.",
+          "recommendation": "Add a ScholarlyArticle (author: the Person, sameAs the DOI URL) and an ItemList of CreativeWork for the projects (or CreativeWork on each project page)."
+        }
+      ],
+      "weight_percent": 10
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 45,
+      "what_works": [
+        "CLS ≈ 0.007 (good) on desktop and mobile",
+        "Hero portrait is preloaded; below-fold images lazy-load",
+        "Fonts self-hosted via next/font with swap"
+      ],
+      "findings": [
+        {
+          "title": "Live build delays mobile LCP from 2.0 s to 7.9 s",
+          "severity": "High",
+          "description": "Lab test (390 px, ~1.6 Mbps/150 ms, 4× CPU): LCP 7.9 s with the default auto-play build versus 2.0 s with animations off. The LCP element is the hero name, which stays hidden until a cursor types it. Desktop LCP is 1.9–2.5 s.",
+          "recommendation": "Render the hero (name, intro, portrait, CTAs) immediately and let the build start below it, or start the build after LCP / on first interaction; skip it on Save-Data and slow connections (navigator.connection)."
+        },
+        {
+          "title": "Heavy main thread on mobile",
+          "severity": "Medium",
+          "description": "Total Blocking Time ≈ 760–840 ms under 4× CPU throttling; ~816 KB of uncompressed JS (≈200 KB gzipped).",
+          "recommendation": "Load BuildSwarm, Cursor and ProjectDialog with next/dynamic (ssr:false) so they don't block first render; trim framer-motion usage where CSS suffices."
+        }
+      ],
+      "weight_percent": 10
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 60,
+      "what_works": [
+        "AI crawlers are not blocked; primary content is server-rendered",
+        "Person JSON-LD with sameAs gives a clean entity",
+        "Agentic check: no P0 failures (robots reachable, real 404, server-rendered)"
+      ],
+      "findings": [
+        {
+          "title": "No llms.txt",
+          "severity": "Low",
+          "description": "/llms.txt and /llms-full.txt return 404. Google Search ignores it; Lighthouse's agentic checks and some assistants read it.",
+          "recommendation": "Add public/llms.txt: one-paragraph summary, links to projects, the IEEE paper, LinkedIn/GitHub and contact."
+        },
+        {
+          "title": "Project facts hidden behind JavaScript",
+          "severity": "Medium",
+          "description": "Answer engines quote passages; the most quotable facts (client, what was designed, results, publication details) are dialog-only.",
+          "recommendation": "Per-project pages with short, factual passages (who, what, when, link)."
+        }
+      ],
+      "weight_percent": 10
+    },
+    {
+      "name": "Images",
+      "score": 92,
+      "what_works": [
+        "All 13 images have width/height (no CLS)",
+        "WebP throughout; 12 of 13 lazy-loaded; descriptive alt text on content images",
+        "Pre-optimised sizes (52–260 KB)"
+      ],
+      "findings": [
+        {
+          "title": "Archive thumbnails use empty alt",
+          "severity": "Low",
+          "description": "8 decorative thumbnails sit next to visible titles, which is correct for accessibility but gives image search nothing.",
+          "recommendation": "Optional: keep as is (preferred for screen readers), or rely on project pages to carry the descriptive images."
+        }
+      ],
+      "weight_percent": 5
+    }
+  ],
+  "measurements": {
+    "lab_vitals": [
+      {
+        "profile": "desktop 1440, build on",
+        "lcp_ms": 2456,
+        "cls": 0.007,
+        "tbt_ms": 291,
+        "fcp_ms": 528
+      },
+      {
+        "profile": "desktop 1440, build on (second run)",
+        "lcp_ms": 1880,
+        "cls": 0.006,
+        "tbt_ms": 125,
+        "fcp_ms": 332
+      },
+      {
+        "profile": "mobile 390, slow 4G + 4x CPU, build on",
+        "lcp_ms": 7944,
+        "cls": 0.008,
+        "tbt_ms": 763,
+        "fcp_ms": 1960
+      },
+      {
+        "profile": "mobile 390, slow 4G + 4x CPU, animations off",
+        "lcp_ms": 2032,
+        "cls": 0.0,
+        "tbt_ms": 844,
+        "fcp_ms": 1860
+      },
+      {
+        "profile": "Googlebot smartphone UA, build on",
+        "lcp_ms": 7948,
+        "cls": 0.009,
+        "tbt_ms": 772,
+        "fcp_ms": 1840,
+        "hidden_blocks_after_9s": 98
+      }
+    ],
+    "word_count": 879,
+    "words_without_js": 943,
+    "images": 13,
+    "js_uncompressed_kb": 816
+  },
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Keep the hero visible on load and skip the auto-build for bots, Save-Data and slow connections",
+          "Fix the H1 / experience heading spacing",
+          "Trim the meta description"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Static case-study page per project (/work/[slug]) in the sitemap, linked from cards and the dialog",
+          "ProfilePage + WebSite + ScholarlyArticle + CreativeWork JSON-LD",
+          "Lazy-load BuildSwarm, Cursor and ProjectDialog"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Deploy, verify in Search Console, submit sitemap",
+          "Add llms.txt; vercel.json security headers",
+          "Consider a custom domain; ask clients for a credit link to the portfolio"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Watch CrUX / Search Console Core Web Vitals after deploy",
+          "Re-run /seo audit after each content change; capture a drift baseline"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

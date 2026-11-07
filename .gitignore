@@ -1,36 +1,26 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
 
-# testing
-/coverage
-
-# next.js
+# next.js build output
 /.next/
 /out/
 
-# production
-/build
-
 # misc
 .DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
+*.log
 .env*.local
-
-# vercel
 .vercel
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# tool caches (graph.json + GRAPH_REPORT.md are meant to be committed)
+/graphify-out/cache/
+.impeccable/config.local.json
+
+# per-developer Claude Code settings
+.claude/settings.local.json
+
+# claude-seo runtime: machine-specific (~1.4 GB). Recreate with:
+#   .claude/skills/seo/scripts/claude-seo setup
+.claude/skills/seo/.venv/
+.claude/skills/seo/ms-playwright/
+.claude/skills/seo/runtime-state.json
+__pycache__/

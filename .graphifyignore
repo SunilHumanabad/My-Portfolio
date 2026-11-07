@@ -1,0 +1,6 @@
+# Keep the knowledge graph about the portfolio itself
+.claude/
+graphify-out/
+public/assets/
+package-lock.json
+*-audit/
